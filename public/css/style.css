@@ -1,0 +1,42 @@
+
+body {
+  --background-color: white;
+  --foreground-color: black;
+  --title-color: maroon;
+  --alt-background-color: lightgoldenrodyellow;
+}
+body {
+  background-color: var(--background-color);
+  color: var(--foreground-color);
+  display: flex;
+  font-family: Arial, Helvetica, sans-serif;
+  justify-content: center;
+}
+
+@media (max-width: 520px) {
+  body {
+    --main-top-pad: 0px;
+    --main-width: 100%;  
+  }
+
+  .application-title {
+    display: none;
+  }
+}
+@media (min-width: 521px) {
+  body {
+    --main-top-pad: 25px;
+    --main-width: 500px;  
+  }
+
+  .application-title {
+    color: var(--title-color);
+    font-size: 4rem;
+    font-weight: bold;
+    left: calc(calc(calc(100% - 500px) / 2) - 11rem);
+    opacity: 0.65;
+    position: fixed;
+    top: calc(calc(100% - 274px) / 2.75);
+    transform: rotate(-90deg);
+  }
+}

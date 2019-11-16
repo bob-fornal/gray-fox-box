@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>Gray Fox Box</title>
+
+  <link rel='icon' href='favicon.ico' type='image/x-icon' />
+  <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
+</head>
+<body id="body">
+  <div class="application-title">Gray Fox Box</div>
+  
+
+  <script src="js/main.js"></script>
+  <script>
+    async function init() {
+      await store.init(window.localStorage);
+      await html.init();
+      await application.init(store, html);
+    }
+    init();
+  </script>
+
+</body>
+</html>
