@@ -5,15 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   
-  <title>Gray Fox Box</title>
+  <title>Gray Fox</title>
 
   <link rel='icon' href='favicon.ico' type='image/x-icon' />
   <link rel="stylesheet" type="text/css" href="css/reset.css" media="screen" />
-  <link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
+  <link rel="stylesheet" type="text/css" href="css/style.css?version=2" media="screen" />
 </head>
 <body id="body">
-  <div class="application-title">Gray Fox Box</div>
+  <div class="application-title">Gray Fox</div>
   
+  <!-- LOGIN -->
   <div id="login" class="hidden">
     <div class="header">Welcome</div>
 
@@ -29,7 +30,21 @@
 
     <button id="login-button" class="default">Login</button>
   </div>
+
+  <!-- VIEW -->
   <div id="view" class="hidden">
+
+    <div class="user" id="logout">
+      <span class="user-image">
+        <img id="user-image" />
+      </span>     
+      <a href="#" id="logout-button">
+        <span id="welcome" class="welcome"></span>
+      </a>
+      <span class="calendar">
+        <img id="calendar-image" class="calendar-image" src="/images/calendar.png" />
+      </span>      
+    </div>
 
   </div>
 
@@ -54,4 +69,7 @@
   <!-- Initialize Firebase -->
   <script src="/__/firebase/init.js"></script>
 </body>
+
+<!-- <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> -->
+
 </html>

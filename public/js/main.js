@@ -18,6 +18,12 @@ const store = {
     await store.storage.removeItem(key);
   },
 
+  logout: async () => {
+    await store.remove(store.storedLogin);
+  },
+  setLogin: async (username) => {
+    return await store.set(store.storedLogin, username);
+  },
   getLogin: async () => {
     return await store.get(store.storedLogin) || null;
   }
@@ -35,6 +41,7 @@ const html = {
 
 const data = {
   loginData: null,
+  loginName: null,
   users: null,
   items: null,
   services: null,
@@ -60,6 +67,7 @@ const data = {
       if (name.toLowerCase() === lowerUsername) {
         found = true;
         data.loginData = data.users[name];
+        data.loginName = name;
         break;
       }
       console.log(name);
@@ -68,6 +76,24 @@ const data = {
   },
   logout: () => {
     data.loginData = null;
+    data.loginName = null;
+  },
+
+  getFirstname: () => {
+    const firstname = data.loginName.split(' ')[0];
+    return firstname;
+  },
+  getLogin: (username) => {
+    const lowerUsername = username.toLowerCase();
+
+    for(let name in data.users) {
+      if (name.toLowerCase() === lowerUsername) {
+        data.loginData = data.users[name];
+        data.loginName = name;
+        break;
+      }
+      console.log(name);
+    }
   }
 }
 
@@ -98,6 +124,8 @@ const application = {
       elements.password = document.getElementById('password');
 
       elements.view = document.getElementById('view');
+      elements.welcome = document.getElementById('welcome');
+      elements.userImage = document.getElementById('user-image');
 
     }
   },
@@ -113,13 +141,13 @@ const application = {
     await application.templates.init();
 
     console.log({ data: application.data });
-    const login = await application.store.getLogin();
-
     application.setupEventListeners();
+
+    const login = await application.store.getLogin();
     if (login === null) {
       application.initiateLogin();
     } else {
-      application.loggedIn();
+      application.loggedIn(login);
     }
   },
 
@@ -127,6 +155,7 @@ const application = {
     document.addEventListener('click', (event) => {
       const target = event.target;
       event.preventDefault();
+      console.log(event.target);
 
       switch (true) {
         case target.matches('#login-button'):
@@ -135,8 +164,9 @@ const application = {
             application.loggedIn();
           }
           break;
-        case target.matches('#logout-button'):
+        case target.matches('#welcome'):
           console.log('logout clicked');
+          application.store.logout();
           application.initiateLogin();
       }
     });
@@ -156,10 +186,21 @@ const application = {
     return valid;
   },
 
-  loggedIn: () => {
+  loggedIn: (username = null) => {
+    if (username === null) {
+      application.store.setLogin(data.loginName);
+    } else {
+      application.data.getLogin(username);
+    }
+
     console.log("logged in", data.loginData);
     application.elements.login.classList.add('hidden');
     application.elements.view.classList.remove('hidden');
+
+    if ("image" in data.loginData) {
+      application.elements.userImage.src = `/images/accounts/${ data.loginData.image }`;
+    }
+    application.elements.welcome.innerText = `Welcome ${ data.getFirstname() }!`
   },
 
   templates: {

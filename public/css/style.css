@@ -44,7 +44,7 @@ body {
     transform: rotate(-90deg);
   }
 
-  #login {
+  #login, #view {
     left: calc(calc(calc(100% - 500px) / 2) + 3rem);
     position: fixed;
     width: calc(500px - 6rem);
@@ -99,4 +99,37 @@ button:hover {
 button.default {
   background-color: blue;
   color: white;
+}
+
+.user {
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+  align-items: center;
+}
+
+.user-image {
+  border: 3px solid var(--title-color);
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.user-image #user-image {
+  width: 100%;
+  height: auto;
+}
+
+.welcome {
+  margin-left: 1rem;
+}
+.calendar {
+  text-align: right;
+}
+
+.calendar-image {
+  width: 3rem;
 }
