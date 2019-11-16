@@ -44,12 +44,16 @@ const data = {
   loginName: null,
   users: null,
   items: null,
+  servicesUnsorted: null,
   services: null,
 
   init: async () => {
     data.users = await data.get('users.json');
     data.items = await data.get('items.json');
-    data.services = await data.get('services.json');
+    data.servicesUnsorted = await data.get('services.json');
+    data.services = data.servicesUnsorted.list.sort(function(a, b) {
+      return a.rating - b.rating;
+    });
   },
 
   get: async (file) => {
@@ -113,6 +117,10 @@ const application = {
     password: null,
 
     view: null,
+    welcome: null,
+    userImage: null,
+    itemsList: null,
+    servicesList: null,
 
     init: () => {
       let elements = application.elements;
@@ -126,7 +134,8 @@ const application = {
       elements.view = document.getElementById('view');
       elements.welcome = document.getElementById('welcome');
       elements.userImage = document.getElementById('user-image');
-
+      elements.itemsList = document.getElementById('items-list');
+      elements.servicesList = document.getElementById('services-list');
     }
   },
 
@@ -148,7 +157,69 @@ const application = {
       application.initiateLogin();
     } else {
       application.loggedIn(login);
+      application.displayItems();
+      application.displayServices();
     }
+
+    application.templates.init();
+  },
+
+  displayItems: () => {
+    application.elements.itemsList.innerHTML = '';
+
+    const categories = data.items.categories;
+    for (let i = 0, i_len = categories.length; i < i_len; i++) {
+      const category = data.items[categories[i]];
+      console.log(category);
+      for (let j = 0, j_len = category.list.length; j < j_len; j++) {
+        let template = application.templates.item;
+        if (j === 0) {
+          template = template.replace('~~CATEGORY~~', `${ category.type }:`);
+        } else {
+          template = template.replace('~~CATEGORY~~', '');          
+        }
+        template = template.replace('~~TITLE~~', category.list[j].title);
+        template = template.replace('~~CHECKED~~', '');
+        if (category.list[j].service !== -1) {
+          template = template.replace('~~SERVICE~~', application.getServiceImage(category.list[j].service));
+        } else {
+          template = template.replace('~~SERVICE~~', '');
+        }
+        console.log(template);
+
+        const html = application.html.fragmentFromString(template);
+        application.elements.itemsList.append(html);
+      }
+    }
+  },
+  displayServices: () => {
+    application.elements.servicesList.innerHTML = '';
+
+    const services = data.services;
+    for (let i = 0, len = services.length; i < len; i++) {
+      const service = services[i];
+      console.log(service);
+
+      let template = application.templates.service;
+      template = template.replace('~~TITLE~~', service.name);
+      template = template.replace('~~URL~~', service.url);
+      template = template.replace('~~IMAGE~~', application.getServiceImage(service.id));
+      console.log(template);
+
+      const html = application.html.fragmentFromString(template);
+      application.elements.servicesList.append(html);
+    }
+  },
+  getServiceImage: (id) => {
+    const services = data.services;
+    let service = null;
+    for (let i = 0, len = services.length; i < len; i++) {
+      if (services[i].id === id) {
+        service = services[i];
+        break;
+      }
+    }
+    return `<img class="service-image" src="/images/${ service.icon }" />`;
   },
 
   setupEventListeners: () => {
@@ -204,16 +275,12 @@ const application = {
   },
 
   templates: {
-    // categoryContent: null,
-    // categoryElement: null,
-    // checklist: null,
-    // settingsState: null,
+    item: null,
+    service: null,
 
     init: async () => {
-      // application.templates.checklist = await application.templates.get('checklist.html');
-      // application.templates.categoryContent = await application.templates.get('category-content.html');
-      // application.templates.categoryElement = await application.templates.get('category-element.html');
-      // application.templates.settingsState = await application.templates.get('settings-state.html');  
+      application.templates.item = await application.templates.get('item.html');
+      application.templates.service = await application.templates.get('service.html');  
     },
     get: async (file) => {
       const templateLocation = `/templates/${ file }`;

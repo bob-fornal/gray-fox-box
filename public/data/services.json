@@ -1,16 +1,32 @@
 {
-    "list": [
-        {
-            "name": "Clark's Handyman",
-            "rating": 3
-        },
-        {
-            "name": "Green Tree Landscape",
-            "rating": 2
-        },
-        {
-            "name": "Gutterguy",
-            "rating": 1
-        }
-    ]
+  "list": [
+    {
+      "id": 1,
+      "name": "Clark's Handyman",
+      "rating": 3,
+      "icon": "handyman.png",
+      "url": "http://www.google.com"
+    },
+    {
+      "id": 2,
+      "name": "Green Tree Landscape",
+      "rating": 2,
+      "icon": "landscape.png",
+      "url": "http://www.google.com"
+    },
+    {
+      "id": 3,
+      "name": "Gutterguy",
+      "rating": 1,
+      "icon": "gutter.png",
+      "url": "http://www.google.com"
+    },
+    {
+      "id": 4,
+      "name": "Tech Guy",
+      "rating": 4,
+      "icon": "tech-guy.png",
+      "url": "http://www.google.com"
+    }
+  ]
 }

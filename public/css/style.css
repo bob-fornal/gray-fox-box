@@ -105,6 +105,9 @@ button.default {
   display: grid;
   grid-template-columns: 1fr 4fr 1fr;
   align-items: center;
+  border-bottom: 2px solid var(--title-color);
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 .user-image {
@@ -132,4 +135,31 @@ button.default {
 
 .calendar-image {
   width: 3rem;
+}
+
+#items-list {
+  border-bottom: 2px solid var(--title-color);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+}
+.item {
+  display: grid;
+  grid-template-columns: 2fr 3fr 1fr 1fr;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+.services-title {
+  margin-bottom: 1rem;
+}
+#services-list {
+  margin-left: 1rem;
+}
+.service-image {
+  height: 2rem;
+}
+.service-item {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  align-items: center;
+  margin-bottom: 0.5rem;
 }
