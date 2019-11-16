@@ -8,9 +8,7 @@ body {
 body {
   background-color: var(--background-color);
   color: var(--foreground-color);
-  display: flex;
   font-family: Arial, Helvetica, sans-serif;
-  justify-content: center;
 }
 
 @media (max-width: 520px) {
@@ -20,8 +18,14 @@ body {
   }
 
   .application-title {
-    display: none;
+    color: var(--title-color);
+    font-size: 2rem;
+    font-weight: bold;
+    opacity: 0.65;
+    padding: 1rem 1rem 0 1rem;
+    text-align: center;
   }
+
 }
 @media (min-width: 521px) {
   body {
@@ -39,4 +43,60 @@ body {
     top: calc(calc(100% - 274px) / 2.75);
     transform: rotate(-90deg);
   }
+
+  #login {
+    left: calc(calc(calc(100% - 500px) / 2) + 3rem);
+    position: fixed;
+    width: calc(500px - 6rem);
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+#login {
+  border: 1px solid blue;
+  margin: 1rem;
+  padding: 1rem;
+}
+#view {
+  margin: 0;
+  padding: 1rem;
+}
+
+.header {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.input {
+  margin-bottom: 1rem;
+}
+.input .title {
+  display: inline-block;
+  width: 35%;
+}
+.input input {
+  font-size: 1.2rem;
+  width: 58%;
+}
+
+button {
+  background-color: silver;
+  border: 1px solid gray;
+  border-radius: 5px;
+  color: black;
+  font-size: 1.2rem;
+  margin-left: 35%;
+  margin-right: 35%;
+  width: 30%;
+}
+button:hover {
+  cursor: pointer;
+}
+button.default {
+  background-color: blue;
+  color: white;
 }

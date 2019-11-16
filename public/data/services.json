@@ -1,0 +1,16 @@
+{
+    "list": [
+        {
+            "name": "Clark's Handyman",
+            "rating": 3
+        },
+        {
+            "name": "Green Tree Landscape",
+            "rating": 2
+        },
+        {
+            "name": "Gutterguy",
+            "rating": 1
+        }
+    ]
+}

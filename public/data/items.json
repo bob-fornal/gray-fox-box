@@ -1,0 +1,29 @@
+{
+  "items": [
+    {
+      "type": "Extras",
+      "priority": "3",
+      "list": [
+        "Card",
+        "Dog Treats"
+      ]
+    },
+    {
+      "type": "Health",
+      "priority": "2",
+      "list": [
+        "Cold Medicine",
+        "Kleenex"
+      ]
+    },
+    {
+      "type": "Safety",
+      "priority": "1",
+      "list": [
+        "Bag of Salt",
+        "Batteries",
+        "Lightbulbs"
+      ]
+    }
+  ]
+}
