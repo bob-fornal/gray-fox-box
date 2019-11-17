@@ -434,6 +434,10 @@ const application = {
   },
 
   initiateLogin: () => {
+    application.displayServices();
+    application.displayItems();
+    application.displayCompanies();
+    
     application.elements.login.classList.remove('hidden');
     application.elements.view.classList.add('hidden');
   },
