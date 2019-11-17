@@ -17,7 +17,7 @@
     {
       "id": 2,
       "name": "Green Tree Landscape",
-      "rating": 2,
+      "rating": 5,
       "icon": "landscape.png",
       "url": "http://www.google.com",
       "services": [
@@ -30,7 +30,7 @@
     {
       "id": 3,
       "name": "Gutterguy",
-      "rating": 1,
+      "rating": 2,
       "icon": "gutter.png",
       "url": "http://www.google.com",
       "services": [
@@ -50,7 +50,7 @@
     {
       "id": 5,
       "name": "Seasonal Setter",
-      "rating": 2,
+      "rating": 1,
       "icon": "seasonal-setter.png",
       "url": "https://seasonalsetter.com/",
       "services": [
