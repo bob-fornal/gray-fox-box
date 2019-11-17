@@ -228,3 +228,12 @@ button.selection {
   background-color: green;
   color: white;
 }
+
+.scheduled-recurring, .scheduled-single {
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+}
+.scheduled-recurring #remove-scheduled,
+.scheduled-single #remove-scheduled {
+  float: right;
+}

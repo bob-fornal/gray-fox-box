@@ -1,6 +1,7 @@
 const store = {
   storage: null,
-  storedLogin: "~~LOGIN~~",
+  storedLogin: '~~LOGIN~~',
+  scheduled: '~~SCHEDULED~~',
 
   init: (storage) => {
     store.storage = storage;
@@ -26,6 +27,13 @@ const store = {
   },
   getLogin: async () => {
     return await store.get(store.storedLogin) || null;
+  },
+
+  getScheduled: async () => {
+    return await store.get(store.scheduled) || {};
+  },
+  setScheduled: async (data) => {
+    await store.set(store.scheduled, data);
   }
 };
 
@@ -175,7 +183,7 @@ const application = {
     application.templates.init();
   },
 
-  displayServices: () => {
+  displayServices: async () => {
     application.elements.servicesList.innerHTML = '';
 
     const services = data.services;
@@ -185,7 +193,7 @@ const application = {
       template = template.replace('~~SERVICE~~', service.type);
       template = template.replace('~~SERVICE_ID~~', service.type);
       template = template.replace('~~OPTIONS~~', application.getOptions(service.id, service.type, service.schedule));
-      template = template.replace('~~SCHEDULED~~', application.getScheduled(service.id));
+      template = template.replace('~~SCHEDULED~~', await application.getScheduled(service.id));
 
       const html = application.html.fragmentFromString(template);
       application.elements.servicesList.append(html);
@@ -218,8 +226,32 @@ const application = {
   toDecimal: (number) => {
     return parseFloat(Math.round(number * 100) / 100).toFixed(2);
   },
-  getScheduled: (id) => {
-    return '';
+  getScheduled: async (id) => {
+    const scheduled = await application.store.getScheduled();
+    const current = scheduled[id] || null;
+
+    let template = null;
+    if (current === null) {
+      template = '';
+    } else if (current.schedule === 'single') {
+      template = application.templates.scheduledSingle;
+      template = template.replace('~~DATE_TIME~~', `01 Dec 2019 1:00 pm`);
+      template = template.replace('~~COMPANY~~', current.name);
+      template = template.replace('~~SERVICE_ID~~', id);
+    } else {
+      template = application.templates.scheduledRecurring;
+      if (current.schedule === 'start-stop') {
+        template = template.replace('~~TIMEFRAME~~', 'to occur');
+      } else {
+        template = template.replace('~~TIMEFRAME~~', 'weekly');
+      }
+      template = template.replace('~~COMPANY~~', current.name);
+      template = template.replace('~~START~~', '01 Oct 2019');
+      template = template.replace('~~STOP~~', '31 Dec 2019');
+      template = template.replace('~~SERVICE_ID~~', id);
+    }
+
+    return template;
   },
 
   displayItems: () => {
@@ -299,6 +331,10 @@ const application = {
           application.elements.wizard.classList.add('hidden');
           application.cancelWizard();
           break;
+        case target.matches('#wizard-schedule'):
+          application.elements.wizard.classList.add('hidden');
+          application.saveWizardChanges();
+          break;
       }
     });
 
@@ -318,6 +354,24 @@ const application = {
     const elementId = `${ application.forCancel.service.type }-select`;
     const element = document.getElementById(elementId);
     element.selectedIndex = 0;
+  },
+  saveWizardChanges: async () => {
+    let scheduled = await application.store.getScheduled();
+    const selected = application.forCancel;
+
+    scheduled[selected.service.id] = {
+      id: selected.company.id,
+      name: selected.company.name,
+      schedule: selected.service.schedule,
+    };
+    if (selected.service.schedule === 'frequency') {
+      scheduled[selected.service.id].costperweek = selected.companyService.costperweek;
+    } else {
+      scheduled[selected.service.id].costtotal = selected.companyService.costtotal;
+    }
+
+    await application.store.setScheduled(scheduled);
+    application.displayServices();
   },
   showWizard: (companyService) => {
     if (companyService === '') {
@@ -414,7 +468,6 @@ const application = {
     company: null,
 
     scheduledSingle: null,
-    scheduledStartStop: null,
     scheduledRecurring: null,
 
     wizardCompanyService: null,
@@ -425,7 +478,6 @@ const application = {
       application.templates.company = await application.templates.get('company.html');
 
       application.templates.scheduledSingle = await application.templates.get('scheduled-single.html');
-      application.templates.scheduledStartStop = await application.templates.get('scheduled-start-stop.html');
       application.templates.scheduledRecurring = await application.templates.get('scheduled-recurring.html');
 
       application.templates.wizardCompanyService = await application.templates.get('wizard-company-service.html');
