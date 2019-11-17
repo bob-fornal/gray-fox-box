@@ -11,6 +11,22 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+a#logout-button:link, a#logout-button:visited, a#logout-button:hover, a#logout-button:active{
+  color: var(--foreground-color);
+  text-decoration: none;
+}
+
+.credits {
+  bottom: 1rem;
+  left: 1rem;
+  position: fixed;
+  font-size: 0.9rem;
+  color: var(--foreground-color);
+}
+.credits-title {
+  font-weight: bold;
+}
+
 @media (max-width: 520px) {
   body {
     --main-top-pad: 0px;
@@ -21,9 +37,17 @@ body {
     color: var(--title-color);
     font-size: 2rem;
     font-weight: bold;
-    opacity: 0.65;
+    opacity: 0.85;
     padding: 1rem 1rem 0 1rem;
     text-align: center;
+    margin-bottom: 5rem;
+  }
+
+  .application-logo {
+    width: 100px;
+    position: absolute;
+    top: 0;
+    left: calc(calc(100% - 100px) / 2);
   }
 
 }
@@ -38,10 +62,16 @@ body {
     font-size: 4rem;
     font-weight: bold;
     left: calc(calc(calc(100% - 500px) / 2) - 11rem);
-    opacity: 0.65;
+    opacity: 0.85;
     position: fixed;
     top: calc(calc(100% - 274px) / 2.75);
     transform: rotate(-90deg);
+  }
+  
+  .application-logo {
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 
   #login, #view {
@@ -56,9 +86,9 @@ body {
 }
 
 #login {
-  border: 1px solid blue;
   margin: 1rem;
   padding: 1rem;
+  color: white;
 }
 #view {
   margin: 0;
@@ -80,7 +110,7 @@ body {
 }
 .input input {
   font-size: 1.2rem;
-  width: 58%;
+  width: 98%;
 }
 
 button {
@@ -109,7 +139,13 @@ button.default.wide {
   width: 60%;
 }
 
+.input input {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
+}
+
 .user {
+  
   display: grid;
   grid-template-columns: 1fr 4fr 1fr;
   align-items: center;
