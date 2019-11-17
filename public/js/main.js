@@ -84,7 +84,6 @@ const data = {
         data.loginName = name;
         break;
       }
-      console.log(name);
     }
     return found;
   },
@@ -106,7 +105,6 @@ const data = {
         data.loginName = name;
         break;
       }
-      console.log(name);
     }
   }
 };
@@ -167,7 +165,6 @@ const application = {
     application.elements.init();
     await application.templates.init();
 
-    console.log({ data: application.data });
     application.setupEventListeners();
 
     const login = await application.store.getLogin();
@@ -260,7 +257,6 @@ const application = {
     const categories = data.items.categories;
     for (let i = 0, i_len = categories.length; i < i_len; i++) {
       const category = data.items[categories[i]];
-      console.log(category);
       for (let j = 0, j_len = category.list.length; j < j_len; j++) {
         let template = application.templates.item;
         if (j === 0) {
@@ -317,13 +313,11 @@ const application = {
 
       switch (true) {
         case target.matches('#login-button'):
-          console.log('login clicked');
           if (!!application.handleLogin()) {
             application.loggedIn();
           }
           break;
         case target.matches('#welcome'):
-          console.log('logout clicked');
           application.store.logout();
           application.initiateLogin();
           break;
@@ -386,7 +380,6 @@ const application = {
     const cs = companyService.split('-');
     const companyId = parseInt(cs[0], 10);
     const serviceId = parseInt(cs[1], 10);
-    console.log(companyId, serviceId);
 
     const companies = data.companies;
     const services = data.services;
@@ -431,7 +424,6 @@ const application = {
 
     const html = application.html.fragmentFromString(template);
     application.elements.wizardContent.append(html);
-    console.log(selected);
     application.elements.wizard.classList.remove('hidden');
   },
   removeScheduled: async (id) => {
@@ -442,14 +434,12 @@ const application = {
   },
 
   initiateLogin: () => {
-    console.log("not logged in");
     application.elements.login.classList.remove('hidden');
     application.elements.view.classList.add('hidden');
   },
   handleLogin: () => {
     const username = application.elements.username.value;
     const password = application.elements.password.value;
-    console.log({ username, password });
 
     const valid = (username.length > 0 && password.length > 0 && !!application.data.validateUsername(username));
     return valid;
@@ -462,7 +452,6 @@ const application = {
       application.data.getLogin(username);
     }
 
-    console.log("logged in", data.loginData);
     application.elements.login.classList.add('hidden');
     application.elements.view.classList.remove('hidden');
 
