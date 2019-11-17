@@ -1,12 +1,16 @@
 {
-    "Bob Fornal": {
-        "image": "bob_fornal.jpg"
-    },
-    "Laura Teeters": {},
-    "Brandon": {
-        "image": "brandon.jpg"
-    },
-    "Aayush Bansal": {},
-    "Bobette": {},
-    "Laurie Tocash": {}
+  "Bob Fornal": {
+    "image": "bob_fornal.jpg"
+  },
+  "Laura Teeters": {
+    "image": "laura_teeters.jpg"
+  },
+  "Brandon": {
+    "image": "brandon.jpg"
+  },
+  "Aayush Bansal": {},
+  "Bobette": {},
+  "Laurie Tocash": {
+    "image": "laurie_tocash.jpg"
+  }
 }
