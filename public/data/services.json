@@ -1,32 +1,34 @@
 {
-  "list": [
-    {
-      "id": 1,
-      "name": "Clark's Handyman",
-      "rating": 3,
-      "icon": "handyman.png",
-      "url": "http://www.google.com"
-    },
-    {
-      "id": 2,
-      "name": "Green Tree Landscape",
-      "rating": 2,
-      "icon": "landscape.png",
-      "url": "http://www.google.com"
-    },
-    {
-      "id": 3,
-      "name": "Gutterguy",
-      "rating": 1,
-      "icon": "gutter.png",
-      "url": "http://www.google.com"
-    },
-    {
-      "id": 4,
-      "name": "Tech Guy",
-      "rating": 4,
-      "icon": "tech-guy.png",
-      "url": "http://www.google.com"
-    }
-  ]
+    "list": [
+        {
+            "type": "Snow Removal",
+            "id": 1,
+            "schedule": "frequency"
+        },
+        {
+            "type": "Hang Christmas Lights",
+            "id": 2,
+            "schedule": "start-stop"
+        },
+        {
+            "type": "Clean Gutters",
+            "id": 3,
+            "schedule": "frequency"
+        },
+        {
+            "type": "Cut Grass",
+            "id": 4,
+            "schedule": "frequency"
+        },
+        {
+            "type": "Rake Leaves",
+            "id": 5,
+            "schedule": "frequency"
+        },
+        {
+            "type": "Transportation",
+            "id": 6,
+            "schedule": "single"
+        }
+    ]
 }

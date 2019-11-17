@@ -1,0 +1,61 @@
+{
+  "list": [
+    {
+      "id": 1,
+      "name": "Clark's Handyman",
+      "rating": 3,
+      "icon": "handyman.png",
+      "url": "http://www.google.com",
+      "services": [
+        { "id": 1, "costperweek": 50.00 },
+        { "id": 2, "costtotal": 600.00 },
+        { "id": 3, "costperweek": 50.00 },
+        { "id": 4, "costperweek": 75.00 },
+        { "id": 5, "costperweek": 100.00 }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Green Tree Landscape",
+      "rating": 2,
+      "icon": "landscape.png",
+      "url": "http://www.google.com",
+      "services": [
+        { "id": 1, "costperweek": 50.00 },
+        { "id": 3, "costperweek": 50.00 },
+        { "id": 4, "costperweek": 75.00 },
+        { "id": 5, "costperweek": 100.00 }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Gutterguy",
+      "rating": 1,
+      "icon": "gutter.png",
+      "url": "http://www.google.com",
+      "services": [
+        { "id": 3, "costperweek": 50.00 }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Transportation Guy",
+      "rating": 4,
+      "icon": "transport-guy.png",
+      "url": "http://www.google.com",
+      "services": [
+        { "id": 6, "costtotal": 100.00 }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Seasonal Setter",
+      "rating": 2,
+      "icon": "seasonal-setter.png",
+      "url": "https://seasonalsetter.com/",
+      "services": [
+        { "id": 2, "costtotal": 395.00 }
+      ]
+    }
+  ]
+}
