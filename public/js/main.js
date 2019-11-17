@@ -335,6 +335,10 @@ const application = {
           application.elements.wizard.classList.add('hidden');
           application.saveWizardChanges();
           break;
+        case target.matches('#remove-scheduled'):
+          const id = parseInt(target.getAttribute('data-service-id'), 10);
+          application.removeScheduled(id);
+          break;
       }
     });
 
@@ -429,6 +433,12 @@ const application = {
     application.elements.wizardContent.append(html);
     console.log(selected);
     application.elements.wizard.classList.remove('hidden');
+  },
+  removeScheduled: async (id) => {
+    let scheduled = await application.store.getScheduled();
+    delete scheduled[id];
+    await application.store.setScheduled(scheduled);
+    application.displayServices();
   },
 
   initiateLogin: () => {
