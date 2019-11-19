@@ -48,17 +48,22 @@
     </div>
   </div>
 
-  <script src="js/main.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/html.js"></script>
+  <script src="js/elements.js"></script>
+  <script src="js/templates.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/application.js"></script>
   <script>
     async function init() {
       await store.init(window.localStorage);
       await html.init();
-      await elements.init();
       await templates.init();
+      await elements.init();
       await data.init();
       await application.init(store, html, elements, templates, data);
     }
-    init();
+    setTimeout(init, 50);
   </script>
 
   <!-- The core Firebase JS SDK is always required and must be listed first -->
