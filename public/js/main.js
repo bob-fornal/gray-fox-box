@@ -150,6 +150,7 @@ const elements = {
 };
 
 const templates = {
+  login: null,
   service: null,
   item: null,
   company: null,
@@ -160,6 +161,7 @@ const templates = {
   wizardCompanyService: null,
 
   init: async () => {
+    templates.login = await templates.get('login.html');
     templates.service = await templates.get('service.html');  
     templates.item = await templates.get('item.html');
     templates.company = await templates.get('company.html');
@@ -193,8 +195,7 @@ const application = {
     application.templates = templates;
     application.data = data;
 
-    application.elements.init();
-    await application.templates.init();
+    application.setupLogin();
 
     application.setupEventListeners();
 
@@ -464,6 +465,11 @@ const application = {
     application.displayServices();
   },
 
+  setupLogin: () => {
+    const html = application.html.fragmentFromString(application.templates.login);
+    application.elements.login.innerHTML = '';
+    application.elements.login.append(html);
+  },
   initiateLogin: () => {
     application.displayServices();
     application.displayItems();
