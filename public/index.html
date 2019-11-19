@@ -73,8 +73,10 @@
     async function init() {
       await store.init(window.localStorage);
       await html.init();
+      await elements.init();
+      await templates.init();
       await data.init();
-      await application.init(store, html, data);
+      await application.init(store, html, elements, templates, data);
     }
     init();
   </script>

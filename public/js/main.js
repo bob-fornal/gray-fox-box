@@ -109,57 +109,88 @@ const data = {
   }
 };
 
+const elements = {
+  body: null,
+
+  login: null,
+  loginButton: null,
+  username: null,
+  password: null,
+
+  view: null,
+  welcome: null,
+  userImage: null,
+  
+  servicesList: null,
+  itemsList: null,
+  companiesList: null,
+
+  wizard: null,
+  wizardContent: null,
+
+  init: () => {
+    elements.body = document.getElementById('body');
+
+    elements.login = document.getElementById('login');
+    elements.loginButton = document.getElementById('login-button');
+    elements.username = document.getElementById('username');
+    elements.password = document.getElementById('password');
+
+    elements.view = document.getElementById('view');
+    elements.welcome = document.getElementById('welcome');
+    elements.userImage = document.getElementById('user-image');
+
+    elements.servicesList = document.getElementById('services-list');
+    elements.itemsList = document.getElementById('items-list');
+    elements.companiesList = document.getElementById('companies-list');
+
+    elements.wizard = document.getElementById('wizard');
+    elements.wizardContent = document.getElementById('wizard-content');
+  }
+};
+
+const templates = {
+  service: null,
+  item: null,
+  company: null,
+
+  scheduledSingle: null,
+  scheduledRecurring: null,
+
+  wizardCompanyService: null,
+
+  init: async () => {
+    templates.service = await templates.get('service.html');  
+    templates.item = await templates.get('item.html');
+    templates.company = await templates.get('company.html');
+
+    templates.scheduledSingle = await templates.get('scheduled-single.html');
+    templates.scheduledRecurring = await templates.get('scheduled-recurring.html');
+
+    templates.wizardCompanyService = await templates.get('wizard-company-service.html');
+  },
+  get: async (file) => {
+    const templateLocation = `/templates/${ file }`;
+    const response = await fetch(templateLocation);
+    const html = await response.text();
+    return html;
+  }  
+};
+
 const application = {
   store: null,
   html: null,
+  elements: null,
+  templates: null,
   data: null,
 
   account: null,
 
-  elements: {
-    body: null,
-
-    login: null,
-    loginButton: null,
-    username: null,
-    password: null,
-
-    view: null,
-    welcome: null,
-    userImage: null,
-    
-    servicesList: null,
-    itemsList: null,
-    companiesList: null,
-
-    wizard: null,
-    wizardContent: null,
-
-    init: () => {
-      let elements = application.elements;
-      elements.body = document.getElementById('body');
-
-      elements.login = document.getElementById('login');
-      elements.loginButton = document.getElementById('login-button');
-      elements.username = document.getElementById('username');
-      elements.password = document.getElementById('password');
-
-      elements.view = document.getElementById('view');
-      elements.welcome = document.getElementById('welcome');
-      elements.userImage = document.getElementById('user-image');
-
-      elements.servicesList = document.getElementById('services-list');
-      elements.itemsList = document.getElementById('items-list');
-      elements.companiesList = document.getElementById('companies-list');
-
-      elements.wizard = document.getElementById('wizard');
-      elements.wizardContent = document.getElementById('wizard-content');
-    }
-  },
-
-  init: async (store, html, data) => {
+  init: async (store, html, elements, templates, data) => {
     application.store = store;
     application.html = html;
+    application.elements = elements;
+    application.templates = templates;
     application.data = data;
 
     application.elements.init();
@@ -463,34 +494,6 @@ const application = {
       application.elements.userImage.src = `/images/accounts/${ data.loginData.image }`;
     }
     application.elements.welcome.innerText = `Welcome ${ data.getFirstname() }!`
-  },
-
-  templates: {
-    service: null,
-    item: null,
-    company: null,
-
-    scheduledSingle: null,
-    scheduledRecurring: null,
-
-    wizardCompanyService: null,
-
-    init: async () => {
-      application.templates.service = await application.templates.get('service.html');  
-      application.templates.item = await application.templates.get('item.html');
-      application.templates.company = await application.templates.get('company.html');
-
-      application.templates.scheduledSingle = await application.templates.get('scheduled-single.html');
-      application.templates.scheduledRecurring = await application.templates.get('scheduled-recurring.html');
-
-      application.templates.wizardCompanyService = await application.templates.get('wizard-company-service.html');
-    },
-    get: async (file) => {
-      const templateLocation = `/templates/${ file }`;
-      const response = await fetch(templateLocation);
-      const html = await response.text();
-      return html;
-    }  
   }
 
 };
