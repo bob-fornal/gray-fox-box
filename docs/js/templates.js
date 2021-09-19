@@ -21,7 +21,7 @@ const templates = {
     templates.wizardCompanyService = await templates.get('wizard-company-service.html');
   },
   get: async (file) => {
-    const templateLocation = `/templates/${ file }`;
+    const templateLocation = `templates/${ file }`;
     const response = await fetch(templateLocation);
     const html = await response.text();
     return html;

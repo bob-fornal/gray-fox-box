@@ -154,7 +154,7 @@ const application = {
         break;
       }
     }
-    return `<img class="${ type }-image" src="/images/${ company.icon }" />`;
+    return `<img class="${ type }-image" src="images/${ company.icon }" />`;
   },
 
   setupEventListeners: () => {
@@ -322,7 +322,7 @@ const application = {
     application.elements.view.classList.remove('hidden');
 
     if ("image" in data.loginData) {
-      application.elements.userImage.src = `/images/accounts/${ data.loginData.image }`;
+      application.elements.userImage.src = `images/accounts/${ data.loginData.image }`;
     }
     application.elements.welcome.innerText = `Welcome ${ data.getFirstname() }!`
   }
