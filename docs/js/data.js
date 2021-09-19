@@ -18,7 +18,7 @@ const data = {
   },
 
   get: async (file) => {
-    const fileLocation = `/data/${ file }`;
+    const fileLocation = `data/${ file }`;
     const response = await fetch(fileLocation);
     const json = await response.json();
     return json;
